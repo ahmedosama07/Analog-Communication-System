@@ -1,6 +1,6 @@
 function [modulatedSignal, f] = DSBTC(xm, xc, Fs)
 %DSBTC Summary of this function goes here
-%   This function performs DSBTC modulation for the signal
+%   This function performs DSBC modulation for the signal
 A = 2*max(xm) ; 
 S_DSB_TC = xc.*(A+xm) ;
  
