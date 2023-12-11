@@ -7,7 +7,7 @@ magnitude = abs(signalF);
 phase = angle(signalF);
 f = linspace( -fs/2 , fs/2 , length(signalF) );
 
-figure(2);
+figure();
 subplot(1,2,1);
 title('signal in the frequency domain');
 plot(f,magnitude);
