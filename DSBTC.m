@@ -6,8 +6,8 @@ S_DSB_TC = xc.*(A+xm) ;
  
 figure(5)
 l = length(S_DSB_TC);
-f = linspace(-Fs/2,Fs/2,l) ;
-modulatedSignal = fftshift(fft(S_DSB_TC,l)) ;
+f = linspace(-Fs/2,Fs/2,l1) ;
+modulatedSignal = fftshift(fft(S_DSB_TC,l1)) ;
 
 plot(f,abs(modulatedSignal)) ;
 title('DSB-TC MODULATION IN FREQUENCY DOMAIN');
