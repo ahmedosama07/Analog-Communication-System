@@ -4,13 +4,38 @@ clc; clear;
 fprintf("Original sound is playing\n");
 sound(signal, fs)
 pause(8);
-[signalFiltered, fs] = transmitterDSB(signal, fs);
+[signalFilteredFreq, signalFilteredTime, fs] = transmitterDSB(signal, fs);
+
+t=linspace(0,length(signalFilteredTime)/fs,length(signalFilteredTime));
+
+figure(3);
+plot(t,signalFilteredTime);
+xlabel('time');
+ylabel('amplitude'); 
+title('Filtered signal in time domain');
+
+f_received = linspace(-fs/2,fs/2,length(signalFilteredTime)) ;
+magnitudeFiltered = abs(signalFilteredFreq) ;
+phaseFiltered = angle(signalFilteredFreq) ;
+figure(4);
+subplot(1,2,1);
+plot(f_received,magnitudeFiltered);
+xlabel('Frequency');
+ylabel('Magnitude'); 
+title('magnitude of filtered signal');
+
+subplot(1,2,2);
+plot(f_received,phaseFiltered);
+xlabel('Frequency');
+ylabel('Phase'); 
+title('Phase of filtered signal ');
+
 %sound(real(abs(signalFiltered)),fs);
 %pause(8);
 fc = 100000;
 
-[modulatedSignalTC, modulatedSignalTCTime, tTC] = modulator(signalFiltered, fc, 5, fs, "TC");
-[modulatedSignalSC, modulatedSignalSCTime, tSC] = modulator(signalFiltered, fc, 5, fs, "SC");
+[modulatedSignalTC, modulatedSignalTCTime, tTC] = modulator(signalFilteredTime, fc, 5, fs, "TC");
+[modulatedSignalSC, modulatedSignalSCTime, tSC] = modulator(signalFilteredTime, fc, 5, fs, "SC");
 
 %% Reciever using ED
 [envelopeTC] = envelopeDetector(modulatedSignalTCTime);
@@ -34,3 +59,4 @@ envelopeSC=resample(envelopeSC, fc,5*fc) ;
 sound(envelopeTC, fc);
 pause(8);
 
+%% Reciever using Coherent Detection
