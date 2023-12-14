@@ -4,6 +4,6 @@ function [signalFiltered, fs] = transmitterDSB(signal, fs)
 %   system using DSB
 [signal, fs, ~] = timeDomain(signal, fs);
 [signalF ,~, ~] = frequencyDomain(signal, fs);
-[signalFiltered, ~] = lowPassFilter(signal, signalF,fs);
+[~, signalFiltered] = lowPassFilter(signal, signalF,fs);
 end
 
