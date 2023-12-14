@@ -34,12 +34,12 @@ title('Phase of filtered signal ');
 %pause(8);
 fc = 100000;
 
-[modulatedSignalTC, modulatedSignalTCTime, tTC] = modulator(signalFilteredTime, fc, 5, fs, "TC");
-[modulatedSignalSC, modulatedSignalSCTime, tSC] = modulator(signalFilteredTime, fc, 5, fs, "SC");
+[modulatedSignalTC, modulatedSignalTCTime, tTC] = modulatorDSB(signalFilteredTime, fc, 5, fs, "TC");
+[modulatedSignalSC, modulatedSignalSCTime, tSC] = modulatorDSB(signalFilteredTime, fc, 5, fs, "SC");
 
 %% Reciever using ED
 [envelopeTC] = envelopeDetector(modulatedSignalTCTime);
-figure(14)
+figure()
 plot(tTC,envelopeTC);
 title('DSB-TC DEMODULATION IN THE TIME DOMAIN USING ENVELOPE');
 xlabel('time ');
