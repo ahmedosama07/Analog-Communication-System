@@ -1,15 +1,18 @@
-function [freqDomain, timeDomain, f] = coherentDetection(modulatedSignal, SNR, resamplingFactor, fc, fs, t)
+function [freqDomain, timeDomain, f] = coherentDetection(modulatedSignal, SNR, resamplingFactor, fc, t, phase)
 %coherentDetection Summary of this function goes here
 %   Function implements coherent detection
 Fs = resamplingFactor * fc;
-xc1 = cos(2*pi*fc*t);
+phase = phase * pi / 180;
+xc1 = cos(2*pi*fc*t + phase);
 xc = transpose(xc1);
 
-noise = awgn(modulatedSignal, SNR);
-size(t)
-size(xc)
-size(noise)
-xm = 2 * noise .* xc;
+if isstring(SNR) && SNR == "No noise"
+    xm = 2 * modulatedSignal .* xc;
+else
+    noise = awgn(modulatedSignal, SNR);
+    xm = 2 * noise .* xc;
+end
+
 Xm = fftshift(fft(xm));
 l = length(Xm);
 
