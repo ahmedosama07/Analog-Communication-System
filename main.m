@@ -60,3 +60,45 @@ sound(envelopeTC, fc);
 pause(8);
 
 %% Reciever using Coherent Detection
+[msgFreq, msgTime, f] = coherentDetection(modulatedSignalSCTime, 0, 5, fc, fs, tSC);
+figure();
+subplot(2, 1, 1);
+plot(f, abs(msgFreq));
+title('DSB-SC DEMODULATION IN FREQUENCY DOMAIN', 'SNR = 0');
+xlabel('frequency(hz)');
+ylabel('amplitude');
+subplot(2, 1, 2);
+plot(tSC, msgTime);
+title('DSB-SC DEMODULATION IN Time DOMAIN', 'SNR = 0');
+xlabel('time');
+ylabel('amplitude');
+
+
+
+[msgFreq, msgTime, f] = coherentDetection(modulatedSignalSCTime, 10, 5, fc, fs, tSC);
+figure();
+subplot(2, 1, 1);
+plot(f, abs(msgFreq));
+title('DSB-SC DEMODULATION IN FREQUENCY DOMAIN', 'SNR = 10');
+xlabel('frequency(hz)');
+ylabel('amplitude');
+subplot(2, 1, 2);
+plot(tSC, msgTime);
+title('DSB-SC DEMODULATION IN Time DOMAIN', 'SNR = 10');
+xlabel('time');
+ylabel('amplitude');
+
+
+
+[msgFreq, msgTime, f] = coherentDetection(modulatedSignalSCTime, 30, 5, fc, fs, tSC);
+figure();
+subplot(2, 1, 1);
+plot(f, abs(msgFreq));
+title('DSB-SC DEMODULATION IN FREQUENCY DOMAIN', 'SNR = 30');
+xlabel('frequency(hz)');
+ylabel('amplitude');
+subplot(2, 1, 2);
+plot(tSC, msgTime);
+title('DSB-SC DEMODULATION IN Time DOMAIN', 'SNR = 30');
+xlabel('time');
+ylabel('amplitude');
