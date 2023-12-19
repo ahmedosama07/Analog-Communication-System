@@ -13,5 +13,6 @@ plot(f,abs(modulatedSignalFreq));
 title('DSB-SC MODULATION IN FREQUENCY DOMAIN');
 xlabel('frequency(hz)');
 ylabel('magnitude');
+saveas(gcf,'figures\Exp1\DSB-SC Modulated Signal - Frequency Domain.png')
 end
 

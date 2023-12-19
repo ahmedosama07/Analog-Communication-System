@@ -13,5 +13,7 @@ plot(f,abs(modulatedSignalFreq));
 title('DSB-TC MODULATION IN FREQUENCY DOMAIN');
 xlabel('frequency(hz)');
 ylabel('amplitude');
+saveas(gcf,'figures\Exp1\DSB-TC Modulated Signal - Frequency Domain.png')
+
 end
 
