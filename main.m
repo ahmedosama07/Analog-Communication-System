@@ -13,6 +13,7 @@ plot(t,signalFilteredTime);
 xlabel('time');
 ylabel('amplitude'); 
 title('Filtered signal in time domain');
+saveas(gcf,'figures\Exp3\Filtered Signal - Time Domain.png');
 
 f_received = linspace(-fs/2,fs/2,length(signalFilteredTime)) ;
 magnitudeFiltered = abs(signalFilteredFreq) ;
@@ -23,82 +24,76 @@ plot(f_received,magnitudeFiltered);
 xlabel('Frequency');
 ylabel('Magnitude'); 
 title('magnitude of filtered signal');
+saveas(gcf,'figures\Exp3\Filtered Signal Magnitude - Frequency Domain.png');
 
 subplot(1,2,2);
 plot(f_received,phaseFiltered);
 xlabel('Frequency');
 ylabel('Phase'); 
 title('Phase of filtered signal ');
+saveas(gcf,'figures\Exp3\Filtered Signal Phase - Frequency Domain.png');
 
-%sound(real(abs(signalFiltered)),fs);
-%pause(8);
+
+fprintf("Filtered sound is playing\n");
+sound(signalFilteredTime, fs)
+pause(8);
+
+
 fc = 100000;
 
-[modulatedSignalTC, modulatedSignalTCTime, tTC] = modulator(signalFilteredTime, fc, 5, fs, "TC");
-[modulatedSignalSC, modulatedSignalSCTime, tSC] = modulator(signalFilteredTime, fc, 5, fs, "SC");
+Kf = input('Enter a value for Kf ');
+A=input('Enter Gain Value ');
+[modulatedSignal, modulatedSignalTime, f, t, scale] = modulatorNBFM(signalFilteredTime, fc, 5, fs, Kf, A);
 
-%% Reciever using ED
-[envelopeTC] = envelopeDetector(modulatedSignalTCTime);
-figure(14)
-plot(tTC,envelopeTC);
-title('DSB-TC DEMODULATION IN THE TIME DOMAIN USING ENVELOPE');
+figure()
+plot(t, real(modulatedSignalTime));
+title("Modulated Signal in Time Domain");
+saveas(gcf,'figures\Exp3\Modulated Signal - Time Domain.png');
+
+figure()
+plot(f, abs(modulatedSignal));
+title("Modulated Signal Magnitude in Frequency Domain");
+saveas(gcf,'figures\Exp3\Modulated Signal Magnitude - Frequency Domain.png');
+
+figure()
+plot(f, angle(modulatedSignal));
+title("Modulated Signal Phase in Frequency Domain");
+saveas(gcf,'figures\Exp3\Modulated Signal Phrequency - Frequency Domain.png');
+
+%% Reciever 
+[envelopeNBFM] = envelopeDetector(modulatedSignalTime);
+
+recievedNBFM = zeros(length(modulatedSignalTime), 1);
+recievedNBFM(2:end) = diff(envelopeNBFM);
+
+xm = resample(recievedNBFM, fc, 5*fc);
+t = linspace(0,length(xm)/(5*fc),length(xm));
+xm = xm / scale;
+
+Xm = fftshift(fft(xm));
+[signalFilteredFreq, signalFilteredTime] = lowPassFilter(Xm,fs);
+f = linspace(-(5*fc)/2, (5*fc)/2, length(signalFilteredFreq));
+
+figure()
+plot(t,signalFilteredTime);
+title('NBFM DEMODULATION IN THE TIME DOMAIN');
 xlabel('time ');
 ylabel('amplitude');
+saveas(gcf,'figures\Exp3\Demodulated Signal - Time Domain.png');
 
-envelopeTC=resample(envelopeTC, fc, 5*fc) ;
-sound(envelopeTC, fc);
+figure()
+subplot(2,1,1);
+plot(f,abs(signalFilteredFreq));
+title('NBFM DEMODULATION MAGNITUDE IN THE FREQUENCY DOMAIN');
+xlabel('frequency ');
+ylabel('amplitude');
+subplot(2,1,2);
+plot(f,angle(signalFilteredFreq));
+title('NBFM DEMODULATION PHASE IN THE FREQUENCY DOMAIN');
+xlabel('frequency ');
+ylabel('phase');
+saveas(gcf,'figures\Exp3\Demodulated Signal - Frequency Domain.png');
+
+sound(signalFilteredTime, fc);
 pause(8);
 
-[envelopeSC] = envelopeDetector(modulatedSignalSCTime);
-figure(8)
-plot(tSC,envelopeSC);
-title('DSB-SC DEMODULATION IN TIME DOMAIN USING ENVELOPE');
-xlabel('time ');
-ylabel('amplitude');
-envelopeSC=resample(envelopeSC, fc,5*fc) ;
-sound(envelopeTC, fc);
-pause(8);
-
-%% Reciever using Coherent Detection
-[msgFreq, msgTime, f] = coherentDetection(modulatedSignalSCTime, 0, 5, fc, fs, tSC);
-figure();
-subplot(2, 1, 1);
-plot(f, abs(msgFreq));
-title('DSB-SC DEMODULATION IN FREQUENCY DOMAIN', 'SNR = 0');
-xlabel('frequency(hz)');
-ylabel('amplitude');
-subplot(2, 1, 2);
-plot(tSC, msgTime);
-title('DSB-SC DEMODULATION IN Time DOMAIN', 'SNR = 0');
-xlabel('time');
-ylabel('amplitude');
-
-
-
-[msgFreq, msgTime, f] = coherentDetection(modulatedSignalSCTime, 10, 5, fc, fs, tSC);
-figure();
-subplot(2, 1, 1);
-plot(f, abs(msgFreq));
-title('DSB-SC DEMODULATION IN FREQUENCY DOMAIN', 'SNR = 10');
-xlabel('frequency(hz)');
-ylabel('amplitude');
-subplot(2, 1, 2);
-plot(tSC, msgTime);
-title('DSB-SC DEMODULATION IN Time DOMAIN', 'SNR = 10');
-xlabel('time');
-ylabel('amplitude');
-
-
-
-[msgFreq, msgTime, f] = coherentDetection(modulatedSignalSCTime, 30, 5, fc, fs, tSC);
-figure();
-subplot(2, 1, 1);
-plot(f, abs(msgFreq));
-title('DSB-SC DEMODULATION IN FREQUENCY DOMAIN', 'SNR = 30');
-xlabel('frequency(hz)');
-ylabel('amplitude');
-subplot(2, 1, 2);
-plot(tSC, msgTime);
-title('DSB-SC DEMODULATION IN Time DOMAIN', 'SNR = 30');
-xlabel('time');
-ylabel('amplitude');
