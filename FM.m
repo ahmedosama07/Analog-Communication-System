@@ -13,6 +13,7 @@ plot(t,signalFilteredTime);
 xlabel('time');
 ylabel('amplitude'); 
 title('Filtered signal in time domain');
+saveas(gcf,'figures\Exp3\Filtered Signal - Time Domain.png');
 
 f_received = linspace(-fs/2,fs/2,length(signalFilteredTime)) ;
 magnitudeFiltered = abs(signalFilteredFreq) ;
@@ -23,12 +24,15 @@ plot(f_received,magnitudeFiltered);
 xlabel('Frequency');
 ylabel('Magnitude'); 
 title('magnitude of filtered signal');
+saveas(gcf,'figures\Exp3\Filtered Signal Magnitude - Frequency Domain.png');
 
 subplot(1,2,2);
 plot(f_received,phaseFiltered);
 xlabel('Frequency');
 ylabel('Phase'); 
 title('Phase of filtered signal ');
+saveas(gcf,'figures\Exp3\Filtered Signal Phase - Frequency Domain.png');
+
 
 fprintf("Filtered sound is playing\n");
 sound(signalFilteredTime, fs)
@@ -44,13 +48,17 @@ A=input('Enter Gain Value ');
 figure()
 plot(t, real(modulatedSignalTime));
 title("Modulated Signal in Time Domain");
+saveas(gcf,'figures\Exp3\Modulated Signal - Time Domain.png');
 
 figure()
 plot(f, abs(modulatedSignal));
 title("Modulated Signal Magnitude in Frequency Domain");
+saveas(gcf,'figures\Exp3\Modulated Signal Magnitude - Frequency Domain.png');
+
 figure()
 plot(f, angle(modulatedSignal));
 title("Modulated Signal Phase in Frequency Domain");
+saveas(gcf,'figures\Exp3\Modulated Signal Phrequency - Frequency Domain.png');
 
 %% Reciever 
 [envelopeNBFM] = envelopeDetector(modulatedSignalTime);
@@ -71,6 +79,7 @@ plot(t,signalFilteredTime);
 title('NBFM DEMODULATION IN THE TIME DOMAIN');
 xlabel('time ');
 ylabel('amplitude');
+saveas(gcf,'figures\Exp3\Demodulated Signal - Time Domain.png');
 
 figure()
 subplot(2,1,1);
@@ -83,6 +92,8 @@ plot(f,angle(signalFilteredFreq));
 title('NBFM DEMODULATION PHASE IN THE FREQUENCY DOMAIN');
 xlabel('frequency ');
 ylabel('phase');
+saveas(gcf,'figures\Exp3\Demodulated Signal - Frequency Domain.png');
 
 sound(signalFilteredTime, fc);
 pause(8);
+
