@@ -8,7 +8,7 @@ pause(8);
 
 t=linspace(0,length(signalFilteredTime)/fs,length(signalFilteredTime));
 
-figure(3);
+figure();
 plot(t,signalFilteredTime);
 xlabel('time');
 ylabel('amplitude'); 
@@ -18,7 +18,7 @@ saveas(gcf,'figures\Exp1\Filtered Signal - Time Domain.png')
 f_received = linspace(-fs/2,fs/2,length(signalFilteredTime)) ;
 magnitudeFiltered = abs(signalFilteredFreq) ;
 phaseFiltered = angle(signalFilteredFreq) ;
-figure(4);
+figure();
 subplot(1,2,1);
 plot(f_received,magnitudeFiltered);
 xlabel('Frequency');
@@ -41,7 +41,7 @@ fc = 100000;
 
 %% Reciever using ED
 [envelopeTC] = envelopeDetector(modulatedSignalTCTime);
-figure()
+figure();
 plot(tTC,envelopeTC);
 title('DSB-TC DEMODULATION IN THE TIME DOMAIN USING ENVELOPE');
 xlabel('time ');
@@ -53,7 +53,7 @@ sound(envelopeTC, fc);
 pause(8);
 
 [envelopeSC] = envelopeDetector(modulatedSignalSCTime);
-figure(8)
+figure();
 plot(tSC,envelopeSC);
 title('DSB-SC DEMODULATION IN TIME DOMAIN USING ENVELOPE');
 xlabel('time ');
