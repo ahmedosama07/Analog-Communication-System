@@ -20,5 +20,7 @@ plot(f,phase);
 xlabel('Frequency');
 ylabel('Phase'); 
 title('Phase spectrum');
+saveas(gcf,'figures\Original Signal - Frequency Domain.png')
+
 end
 

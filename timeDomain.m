@@ -8,5 +8,7 @@ plot(t,signal);
 xlabel('Time');
 ylabel('Amplitude'); 
 title('The signal in time domain');
+saveas(gcf,'figures\Original Signal - Time Domain.png')
+
 end
 

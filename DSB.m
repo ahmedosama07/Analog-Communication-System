@@ -8,16 +8,17 @@ pause(8);
 
 t=linspace(0,length(signalFilteredTime)/fs,length(signalFilteredTime));
 
-figure(3);
+figure();
 plot(t,signalFilteredTime);
 xlabel('time');
 ylabel('amplitude'); 
 title('Filtered signal in time domain');
+saveas(gcf,'figures\Exp1\Filtered Signal - Time Domain.png')
 
 f_received = linspace(-fs/2,fs/2,length(signalFilteredTime)) ;
 magnitudeFiltered = abs(signalFilteredFreq) ;
 phaseFiltered = angle(signalFilteredFreq) ;
-figure(4);
+figure();
 subplot(1,2,1);
 plot(f_received,magnitudeFiltered);
 xlabel('Frequency');
@@ -29,6 +30,7 @@ plot(f_received,phaseFiltered);
 xlabel('Frequency');
 ylabel('Phase'); 
 title('Phase of filtered signal ');
+saveas(gcf,'figures\Exp1\Filtered Signal - Frequency Domain.png')
 
 %sound(real(abs(signalFiltered)),fs);
 %pause(8);
@@ -39,22 +41,25 @@ fc = 100000;
 
 %% Reciever using ED
 [envelopeTC] = envelopeDetector(modulatedSignalTCTime);
-figure()
+figure();
 plot(tTC,envelopeTC);
 title('DSB-TC DEMODULATION IN THE TIME DOMAIN USING ENVELOPE');
 xlabel('time ');
 ylabel('amplitude');
+saveas(gcf,'figures\Exp1\DSB-TC Demodulated Signal - Time Domain.png')
 
 envelopeTC=resample(envelopeTC, fc, 5*fc) ;
 sound(envelopeTC, fc);
 pause(8);
 
 [envelopeSC] = envelopeDetector(modulatedSignalSCTime);
-figure(8)
+figure();
 plot(tSC,envelopeSC);
 title('DSB-SC DEMODULATION IN TIME DOMAIN USING ENVELOPE');
 xlabel('time ');
 ylabel('amplitude');
+saveas(gcf,'figures\Exp1\DSB-SC Demodulated Signal - Time Domain.png')
+
 envelopeSC=resample(envelopeSC, fc,5*fc) ;
 sound(envelopeTC, fc);
 pause(8);
@@ -72,6 +77,7 @@ plot(tSC, msgTime);
 title('DSB-SC DEMODULATION IN Time DOMAIN', 'SNR = 0');
 xlabel('time');
 ylabel('amplitude');
+saveas(gcf,'figures\Exp1\DSB-SC Demodulated Signal 0 SNR.png')
 
 
 
@@ -87,6 +93,7 @@ plot(tSC, msgTime);
 title('DSB-SC DEMODULATION IN Time DOMAIN', 'SNR = 10');
 xlabel('time');
 ylabel('amplitude');
+saveas(gcf,'figures\Exp1\DSB-SC Demodulated Signal 10 SNR.png')
 
 
 
@@ -102,6 +109,7 @@ plot(tSC, msgTime);
 title('DSB-SC DEMODULATION IN Time DOMAIN', 'SNR = 30');
 xlabel('time');
 ylabel('amplitude');
+saveas(gcf,'figures\Exp1\DSB-SC Demodulated Signal 30 SNR.png')
 
 
 fe = 100;
@@ -117,6 +125,7 @@ plot(tSC, msgTime);
 title('DSB-SC DEMODULATION IN Time DOMAIN', 'frequency error = 100 Hz');
 xlabel('time');
 ylabel('amplitude');
+saveas(gcf,'figures\Exp1\DSB-SC Demodulated Signal frequency error 100 Hz.png')
 
 
 phase = 20;
@@ -132,3 +141,4 @@ plot(tSC, msgTime);
 title('DSB-SC DEMODULATION IN Time DOMAIN', 'phase error = 20 degree');
 xlabel('time');
 ylabel('amplitude');
+saveas(gcf,'figures\Exp1\DSB-SC Demodulated Signal phase error 20 degree.png')
