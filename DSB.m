@@ -105,7 +105,7 @@ ylabel('amplitude');
 
 
 fe = 100;
-[msgFreq, msgTime, f] = coherentDetection(modulatedSignalSCTime, "No noise", 5, fc + fe, tSC, 0);
+[msgFreq, msgTime, f] = coherentDetection(modulatedSignalSCTime, 30, 5, fc + fe, tSC, 0);
 figure();
 subplot(2, 1, 1);
 plot(f, abs(msgFreq));
@@ -120,7 +120,7 @@ ylabel('amplitude');
 
 
 phase = 20;
-[msgFreq, msgTime, f] = coherentDetection(modulatedSignalSCTime, "No noise", 5, fc, tSC, phase);
+[msgFreq, msgTime, f] = coherentDetection(modulatedSignalSCTime, 30, 5, fc, tSC, phase);
 figure();
 subplot(2, 1, 1);
 plot(f, abs(msgFreq));
