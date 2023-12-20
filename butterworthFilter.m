@@ -2,7 +2,7 @@ function [signalFilteredFreq, signalFilteredTime] = butterworthFilter(signalT, f
 %butterworthFilter Summary of this function goes here
 %   The function applies fourth degree Butterworth BPF to the signal and 
 %   returns output filtered signal in both time and frequency domains
-[b, a] = butter(4, [(fc - 4000)/(Fs/2) fc/(Fs / 2)], 'banddpass');
+[b, a] = butter(4, [(fc - 4000)/(Fs/2) fc/(Fs / 2)], 'bandpass');
 signalFilteredTime = filter(b, a, signalT);
 signalFilteredFreq = fftshift(fft(signalFilteredTime));
 end
