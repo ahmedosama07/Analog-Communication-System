@@ -1,4 +1,4 @@
-function [freqDomain, timeDomain, f] = coherentDetection(modulatedSignal, SNR, resamplingFactor, fc, t, phase)
+function [freqDomain, timeDomain, f] = coherentDetection(modulatedSignal, SNR, resamplingFactor, fc, t, phase, filterType)
 %coherentDetection Summary of this function goes here
 %   Function implements coherent detection
 Fs = resamplingFactor * fc;
@@ -16,8 +16,15 @@ end
 Xm = fftshift(fft(xm));
 l = length(Xm);
 
-[Xm, xm] = lowPassFilter(Xm, Fs);
 
+if filterType == "ideal"
+    [Xm, xm] = lowPassFilter(Xm, Fs);
+elseif filterType == "butter"
+    [b, a] = butter(4, 2*fc/Fs);
+    xm = filter(b, a, xm);
+    Xm = fftshift(fft(xm));
+end
+    
 f = linspace(-Fs/2, Fs/2, l);
 freqDomain = Xm;
 timeDomain = xm;
