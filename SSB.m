@@ -34,14 +34,14 @@ title('Phase of filtered signal ');
 %pause(8);
 fc = 100000;
 
-[modulatedSignalBP, modulatedSignalBPTime, tBP, fBP] = modulatorSSB(signalFilteredTime, fc, 5, fs, "bandpass");
-[modulatedSignalButter, modulatedSignalButterTime, tButter, fButter] = modulatorSSB(signalFilteredTime, fc, 5, fs, "butterworth");
+[modulatedSignalBP, modulatedSignalBPTime, tBP, fBP] = modulatorSSB(signalFilteredTime, fc, 5, fs, "bandpass", "SC");
+[modulatedSignalButter, modulatedSignalButterTime, tButter, fButter] = modulatorSSB(signalFilteredTime, fc, 5, fs, "butterworth", "SC");
 
 figure();
 plot(tBP, modulatedSignalBPTime);
 xlabel('time');
 ylabel('amplitude'); 
-title('Modulated SSB signal in time domain', '[Ideal BPF]');
+title('Modulated SSB-SC signal in time domain', '[Ideal BPF]');
 saveas(gcf,'figures\Exp2\SSB-SC Modulated Signal - Time [Ideal BPF].png')
 
 figure();
@@ -62,7 +62,7 @@ figure();
 plot(tButter, modulatedSignalButterTime);
 xlabel('time');
 ylabel('amplitude'); 
-title('Modulated SSB signal in time domain', '[Fourth order Butterworth BPF]');
+title('Modulated SSB-SC signal in time domain', '[Fourth order Butterworth BPF]');
 saveas(gcf,'figures\Exp2\SSB-SC Modulated Signal - Time [Fourth order Butterworth BPF].png')
 
 figure();
@@ -92,7 +92,9 @@ title('SSB-SC DEMODULATION IN Time DOMAIN', '[Ideal BPF]');
 xlabel('time');
 ylabel('amplitude');
 saveas(gcf,'figures\Exp2\SSB-SC Demodulated Signal [No nise] [Ideal LPF].png')
-
+msgTime=resample(msgTime, fc,5*fc) ;
+sound(msgTime, fc);
+pause(8)
 
 [msgFreq, msgTime, f] = coherentDetection(modulatedSignalBPTime, 0, 5, fc, tBP, 0, 'ideal');
 figure();
@@ -107,7 +109,9 @@ title('DSB-SC DEMODULATION IN Time DOMAIN', '[Ideal LPF] - [SNR = 0]');
 xlabel('time');
 ylabel('amplitude');
 saveas(gcf,'figures\Exp2\SSB-SC Demodulated Signal [SNR = 0] [Ideal LPF].png')
-
+msgTime=resample(msgTime, fc,5*fc) ;
+sound(msgTime, fc);
+pause(8)
 
 [msgFreq, msgTime, f] = coherentDetection(modulatedSignalBPTime, 10, 5, fc, tBP, 0, 'ideal');
 figure();
@@ -122,7 +126,9 @@ title('DSB-SC DEMODULATION IN Time DOMAIN', '[Ideal LPF] - [SNR = 10]');
 xlabel('time');
 ylabel('amplitude');
 saveas(gcf,'figures\Exp2\SSB-SC Demodulated Signal [SNR = 10] [Ideal LPF].png')
-
+msgTime=resample(msgTime, fc,5*fc) ;
+sound(msgTime, fc);
+pause(8)
 
 [msgFreq, msgTime, f] = coherentDetection(modulatedSignalBPTime, 30, 5, fc, tBP, 0, 'ideal');
 figure();
@@ -137,7 +143,9 @@ title('DSB-SC DEMODULATION IN Time DOMAIN', '[Ideal LPF] - [SNR = 30]');
 xlabel('time');
 ylabel('amplitude');
 saveas(gcf,'figures\Exp2\SSB-SC Demodulated Signal [SNR = 30] [Ideal LPF].png')
-
+msgTime=resample(msgTime, fc,5*fc) ;
+sound(msgTime, fc);
+pause(8)
 %% Reciever using Coherent Detection Butter
 [msgFreq, msgTime, f] = coherentDetection(modulatedSignalButterTime, "No noise", 5, fc, tBP, 0, 'butter');
 figure();
@@ -152,3 +160,41 @@ title('SSB-SC DEMODULATION IN Time DOMAIN', '[Butterworth BPF]');
 xlabel('time');
 ylabel('amplitude');
 saveas(gcf,'figures\Exp2\SSB-SC Demodulated Signal [No nise] [Butterworth LPF].png')
+
+msgTime=resample(msgTime, fc,5*fc) ;
+sound(msgTime, fc);
+pause(8)
+%% SSB - TC modulation
+[modulatedSignalBP, modulatedSignalBPTime, tBP, fBP] = modulatorSSB(signalFilteredTime, fc, 5, fs, "bandpass", "TC");
+figure();
+plot(tBP, modulatedSignalBPTime);
+xlabel('time');
+ylabel('amplitude'); 
+title('Modulated SSB-TC signal in time domain', '[Ideal BPF]');
+saveas(gcf,'figures\Exp2\SSB-TC Modulated Signal - Time [Ideal BPF].png')
+
+figure();
+subplot(2, 1, 1);
+plot(fBP,abs(modulatedSignalBP));
+title('SSB-TC MODULATION MAGNITUDE IN FREQUENCY DOMAIN', '[Ideal BPF]');
+xlabel('frequency(hz)');
+ylabel('magnitude');
+subplot(2, 1, 2);
+plot(fBP,angle(modulatedSignalBP));
+title('SSB-TC MODULATION PHASE IN FREQUENCY DOMAIN', '[Ideal BPF]');
+xlabel('frequency(hz)');
+ylabel('phase');
+saveas(gcf,'figures\Exp2\SSB-TC Modulated Signal - Frequency [Ideal BPF].png')
+
+%% Reciever using ED
+[envelopeTC] = envelopeDetector(modulatedSignalBPTime);
+figure()
+plot(tBP,envelopeTC);
+title('SSB-TC DEMODULATION IN THE TIME DOMAIN USING ENVELOPE');
+xlabel('time');
+ylabel('amplitude');
+saveas(gcf,'figures\Exp2\SSB-TC Demodulated Signal - Frequency [Ideal LPF].png')
+
+envelopeTC=resample(envelopeTC, fc, 5*fc) ;
+sound(envelopeTC, fc);
+pause(8);
