@@ -140,6 +140,24 @@ pause(8);
 
 %% Reciever using Coherent Detection
 %DSB-SC
+[msgFreq, msgTime, f] = coherentDetection(modulatedSignalSCTime, "No noise", 5, fc, tSC, 0);
+figure();
+subplot(2, 1, 1);
+plot(f, abs(msgFreq));
+title('DSB-SC DEMODULATION IN FREQUENCY DOMAIN', 'No noise');
+xlabel('frequency(hz)');
+ylabel('amplitude');
+subplot(2, 1, 2);
+plot(tSC, msgTime);
+title('DSB-SC DEMODULATION IN Time DOMAIN', 'No noise');
+xlabel('time');
+ylabel('amplitude');
+saveas(gcf,'figures\Exp1\DSB-SC Demodulated Signal [No noise].png')
+msgTime=resample(msgTime, fc,5*fc) ;
+fprintf("DSBSC Recieved using CD [No noise] sound is playing\n");
+sound(msgTime, fc);
+pause(8);
+
 [msgFreq, msgTime, f] = coherentDetection(modulatedSignalSCTime, 0, 5, fc, tSC, 0);
 figure();
 subplot(2, 1, 1);
@@ -153,7 +171,10 @@ title('DSB-SC DEMODULATION IN Time DOMAIN', 'SNR = 0');
 xlabel('time');
 ylabel('amplitude');
 saveas(gcf,'figures\Exp1\DSB-SC Demodulated Signal 0 SNR.png')
-
+msgTime=resample(msgTime, fc,5*fc) ;
+fprintf("DSBSC Recieved using CD [SNR = 0] sound is playing\n");
+sound(msgTime, fc);
+pause(8);
 
 
 [msgFreq, msgTime, f] = coherentDetection(modulatedSignalSCTime, 10, 5, fc, tSC, 0);
@@ -169,7 +190,9 @@ title('DSB-SC DEMODULATION IN Time DOMAIN', 'SNR = 10');
 xlabel('time');
 ylabel('amplitude');
 saveas(gcf,'figures\Exp1\DSB-SC Demodulated Signal 10 SNR.png')
-
+fprintf("DSBSC Recieved using CD [SNR = 10] sound is playing\n");
+sound(msgTime, fc);
+pause(8);
 
 
 [msgFreq, msgTime, f] = coherentDetection(modulatedSignalSCTime, 30, 5, fc, tSC, 0);
@@ -185,7 +208,9 @@ title('DSB-SC DEMODULATION IN Time DOMAIN', 'SNR = 30');
 xlabel('time');
 ylabel('amplitude');
 saveas(gcf,'figures\Exp1\DSB-SC Demodulated Signal 30 SNR.png')
-
+fprintf("DSBSC Recieved using CD [SNR = 30] sound is playing\n");
+sound(msgTime, fc);
+pause(8);
 
 fe = 100;
 [msgFreq, msgTime, f] = coherentDetection(modulatedSignalSCTime, 30, 5, fc + fe, tSC, 0);
@@ -201,7 +226,9 @@ title('DSB-SC DEMODULATION IN Time DOMAIN', 'frequency error = 100 Hz');
 xlabel('time');
 ylabel('amplitude');
 saveas(gcf,'figures\Exp1\DSB-SC Demodulated Signal frequency error 100 Hz.png')
-
+fprintf("DSBSC Recieved using CD [fe = 100 Hz] sound is playing\n");
+sound(msgTime, fc);
+pause(8);
 
 phase = 20;
 [msgFreq, msgTime, f] = coherentDetection(modulatedSignalSCTime, 30, 5, fc, tSC, phase);
@@ -217,8 +244,27 @@ title('DSB-SC DEMODULATION IN Time DOMAIN', 'phase error = 20 degree');
 xlabel('time');
 ylabel('amplitude');
 saveas(gcf,'figures\Exp1\DSB-SC Demodulated Signal phase error 20 degree.png')
+fprintf("DSBSC Recieved using CD [phase error = 20] sound is playing\n");
+sound(msgTime, fc);
+pause(8);
 
 % DSB-TC
+[msgFreq, msgTime, f] = coherentDetection(modulatedSignalTCTime, "No noise", 5, fc, tTC, 0);
+figure();
+subplot(2, 1, 1);
+plot(f, abs(msgFreq));
+title('DSB-TC DEMODULATION IN FREQUENCY DOMAIN', '[No noise]');
+xlabel('frequency(hz)');
+ylabel('amplitude');
+subplot(2, 1, 2);
+plot(tTC, msgTime);
+title('DSB-TC DEMODULATION IN Time DOMAIN', '[No noise]');
+xlabel('time');
+ylabel('amplitude');
+saveas(gcf,'figures\Exp1\DSB-TC Demodulated Signal 0 SNR.png')
+fprintf("DSBTC Recieved using CD [No noise] sound is playing\n");
+sound(msgTime, fc);
+pause(8);
 
 [msgFreq, msgTime, f] = coherentDetection(modulatedSignalTCTime, 0, 5, fc, tTC, 0);
 figure();
@@ -233,7 +279,9 @@ title('DSB-TC DEMODULATION IN Time DOMAIN', 'SNR = 0');
 xlabel('time');
 ylabel('amplitude');
 saveas(gcf,'figures\Exp1\DSB-TC Demodulated Signal 0 SNR.png')
-
+fprintf("DSBTC Recieved using CD [SNR = 0] sound is playing\n");
+sound(msgTime, fc);
+pause(8);
 
 
 [msgFreq, msgTime, f] = coherentDetection(modulatedSignalTCTime, 10, 5, fc, tTC, 0);
@@ -249,7 +297,9 @@ title('DSB-TC DEMODULATION IN Time DOMAIN', 'SNR = 10');
 xlabel('time');
 ylabel('amplitude');
 saveas(gcf,'figures\Exp1\DSB-TC Demodulated Signal 10 SNR.png')
-
+fprintf("DSBTC Recieved using CD [SNR = 10] sound is playing\n");
+sound(msgTime, fc);
+pause(8);
 
 
 [msgFreq, msgTime, f] = coherentDetection(modulatedSignalTCTime, 30, 5, fc, tTC, 0);
@@ -265,7 +315,9 @@ title('DSB-TC DEMODULATION IN Time DOMAIN', 'SNR = 30');
 xlabel('time');
 ylabel('amplitude');
 saveas(gcf,'figures\Exp1\DSB-TC Demodulated Signal 30 SNR.png')
-
+fprintf("DSBTC Recieved using CD [SNR = 30] sound is playing\n");
+sound(msgTime, fc);
+pause(8);
 
 fe = 100;
 [msgFreq, msgTime, f] = coherentDetection(modulatedSignalTCTime, 30, 5, fc + fe, tTC, 0);
@@ -281,7 +333,9 @@ title('DSB-TC DEMODULATION IN Time DOMAIN', 'frequency error = 100 Hz');
 xlabel('time');
 ylabel('amplitude');
 saveas(gcf,'figures\Exp1\DSB-TC Demodulated Signal frequency error 100 Hz.png')
-
+fprintf("DSBTC Recieved using CD [fe = 100 Hz] sound is playing\n");
+sound(msgTime, fc);
+pause(8);
 
 phase = 20;
 [msgFreq, msgTime, f] = coherentDetection(modulatedSignalTCTime, 30, 5, fc, tTC, phase);
@@ -297,3 +351,6 @@ title('DSB-TC DEMODULATION IN Time DOMAIN', 'phase error = 20 degree');
 xlabel('time');
 ylabel('amplitude');
 saveas(gcf,'figures\Exp1\DSB-TC Demodulated Signal phase error 20 degree.png')
+fprintf("DSBTC Recieved using CD [phase error = 20] sound is playing\n");
+sound(msgTime, fc);
+pause(8);
