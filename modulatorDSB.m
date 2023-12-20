@@ -1,4 +1,4 @@
-function [modulatedSignalFreq, modulatedSignalTime, t] = modulatorDSB(signalFiltered, fc, resamplingFactor, fs, samplingType)
+function [modulatedSignalFreq, modulatedSignalTime, t, f] = modulatorDSB(signalFiltered, fc, resamplingFactor, fs, samplingType)
 %modulatorDSB Summary of this function goes here
 %   This function modulates the signal according to DSB modulation type 
 %   given and returns the modulated signal
@@ -14,5 +14,9 @@ if samplingType == "TC"
     [modulatedSignalFreq, modulatedSignalTime] = DSBTC(xm, xc, Fs);
 elseif samplingType == "SC"
     [modulatedSignalFreq, modulatedSignalTime] = DSBSC(xm, xc, Fs);
+end
+
+l = length(modulatedSignalTime);
+f = linspace(-Fs/2,Fs/2,l);
 end
 
