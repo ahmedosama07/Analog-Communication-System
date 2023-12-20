@@ -1,4 +1,4 @@
-function [modulatedSignalFreq, modulatedSignalTime, t] = modulatorSSB(signalFiltered, fc, resamplingFactor, fs, filterType)
+function [modulatedSignalFreq, modulatedSignalTime, t, f] = modulatorSSB(signalFiltered, fc, resamplingFactor, fs, filterType)
 %modulatorSSB Summary of this function goes here
 %   This function modulates the signal according to SSB modulation type 
 %   given and returns the modulated signal
@@ -9,10 +9,9 @@ f = linspace(-Fs/2,Fs/2,l);
 
 figure()
 plot(t, DSBSC_Time);
-plot(f,angle(DSBSC_Time));
 title('DSB-SC MODULATION IN TIME DOMAIN');
-xlabel('frequency(hz)');
-ylabel('phase');
+xlabel('time');
+ylabel('magnitude');
 saveas(gcf,'figures\Exp2\DSB-SC Modulated Signal - Time.png')
 
 figure()
@@ -32,7 +31,7 @@ saveas(gcf,'figures\Exp2\DSB-SC Modulated Signal - Frequency.png')
 if filterType == "bandpass"
     [modulatedSignalFreq, modulatedSignalTime] = bandPassFilter(DSBSC_Freq, f, fc);
 elseif filterType == "butterworth"
-    [modulatedSignalFreq, modulatedSignalTime] = butterworthFilter(DSBSC_T, fc, Fs);
+    [modulatedSignalFreq, modulatedSignalTime] = butterworthFilter(DSBSC_Time, fc, Fs);
 
 end
 
