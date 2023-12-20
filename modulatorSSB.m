@@ -7,6 +7,28 @@ Fs = resamplingFactor * fc;
 l = length(DSBSC_Time);
 f = linspace(-Fs/2,Fs/2,l);
 
+figure()
+plot(t, DSBSC_Time);
+plot(f,angle(DSBSC_Time));
+title('DSB-SC MODULATION IN TIME DOMAIN');
+xlabel('frequency(hz)');
+ylabel('phase');
+saveas(gcf,'figures\Exp2\DSB-SC Modulated Signal - Time.png')
+
+figure()
+subplot(2, 1, 1);
+plot(f,abs(DSBSC_Freq));
+title('DSB-SC MODULATION MAGNITUDE IN FREQUENCY DOMAIN');
+xlabel('frequency(hz)');
+ylabel('magnitude');
+subplot(2, 1, 2);
+plot(f,angle(DSBSC_Freq));
+title('DSB-SC MODULATION PHASE IN FREQUENCY DOMAIN');
+xlabel('frequency(hz)');
+ylabel('phase');
+saveas(gcf,'figures\Exp2\DSB-SC Modulated Signal - Frequency.png')
+
+
 if filterType == "bandpass"
     [modulatedSignalFreq, modulatedSignalTime] = bandPassFilter(DSBSC_Freq, f, fc);
 elseif filterType == "butterworth"
