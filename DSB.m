@@ -65,6 +65,7 @@ sound(envelopeTC, fc);
 pause(8);
 
 %% Reciever using Coherent Detection
+%DSB-SC
 [msgFreq, msgTime, f] = coherentDetection(modulatedSignalSCTime, 0, 5, fc, tSC, 0);
 figure();
 subplot(2, 1, 1);
@@ -142,3 +143,83 @@ title('DSB-SC DEMODULATION IN Time DOMAIN', 'phase error = 20 degree');
 xlabel('time');
 ylabel('amplitude');
 saveas(gcf,'figures\Exp1\DSB-SC Demodulated Signal phase error 20 degree.png')
+
+% DSB-TC
+
+[msgFreq, msgTime, f] = coherentDetection(modulatedSignalTCTime, 0, 5, fc, tTC, 0);
+figure();
+subplot(2, 1, 1);
+plot(f, abs(msgFreq));
+title('DSB-TC DEMODULATION IN FREQUENCY DOMAIN', 'SNR = 0');
+xlabel('frequency(hz)');
+ylabel('amplitude');
+subplot(2, 1, 2);
+plot(tTC, msgTime);
+title('DSB-TC DEMODULATION IN Time DOMAIN', 'SNR = 0');
+xlabel('time');
+ylabel('amplitude');
+saveas(gcf,'figures\Exp1\DSB-TC Demodulated Signal 0 SNR.png')
+
+
+
+[msgFreq, msgTime, f] = coherentDetection(modulatedSignalTCTime, 10, 5, fc, tTC, 0);
+figure();
+subplot(2, 1, 1);
+plot(f, abs(msgFreq));
+title('DSB-TC DEMODULATION IN FREQUENCY DOMAIN', 'SNR = 10');
+xlabel('frequency(hz)');
+ylabel('amplitude');
+subplot(2, 1, 2);
+plot(tTC, msgTime);
+title('DSB-TC DEMODULATION IN Time DOMAIN', 'SNR = 10');
+xlabel('time');
+ylabel('amplitude');
+saveas(gcf,'figures\Exp1\DSB-TC Demodulated Signal 10 SNR.png')
+
+
+
+[msgFreq, msgTime, f] = coherentDetection(modulatedSignalTCTime, 30, 5, fc, tTC, 0);
+figure();
+subplot(2, 1, 1);
+plot(f, abs(msgFreq));
+title('DSB-TC DEMODULATION IN FREQUENCY DOMAIN', 'SNR = 30');
+xlabel('frequency(hz)');
+ylabel('amplitude');
+subplot(2, 1, 2);
+plot(tTC, msgTime);
+title('DSB-TC DEMODULATION IN Time DOMAIN', 'SNR = 30');
+xlabel('time');
+ylabel('amplitude');
+saveas(gcf,'figures\Exp1\DSB-TC Demodulated Signal 30 SNR.png')
+
+
+fe = 100;
+[msgFreq, msgTime, f] = coherentDetection(modulatedSignalTCTime, 30, 5, fc + fe, tTC, 0);
+figure();
+subplot(2, 1, 1);
+plot(f, abs(msgFreq));
+title('DSB-TC DEMODULATION IN FREQUENCY DOMAIN', 'frequency error = 100 Hz');
+xlabel('frequency(hz)');
+ylabel('amplitude');
+subplot(2, 1, 2);
+plot(tTC, msgTime);
+title('DSB-TC DEMODULATION IN Time DOMAIN', 'frequency error = 100 Hz');
+xlabel('time');
+ylabel('amplitude');
+saveas(gcf,'figures\Exp1\DSB-TC Demodulated Signal frequency error 100 Hz.png')
+
+
+phase = 20;
+[msgFreq, msgTime, f] = coherentDetection(modulatedSignalTCTime, 30, 5, fc, tTC, phase);
+figure();
+subplot(2, 1, 1);
+plot(f, abs(msgFreq));
+title('DSB-TC DEMODULATION IN FREQUENCY DOMAIN', 'phase error = 20 degree');
+xlabel('frequency(hz)');
+ylabel('amplitude');
+subplot(2, 1, 2);
+plot(tTC, msgTime);
+title('DSB-TC DEMODULATION IN Time DOMAIN', 'phase error = 20 degree');
+xlabel('time');
+ylabel('amplitude');
+saveas(gcf,'figures\Exp1\DSB-TC Demodulated Signal phase error 20 degree.png')
