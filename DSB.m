@@ -171,7 +171,7 @@ title('DSB-SC DEMODULATION IN Time DOMAIN', 'SNR = 0');
 xlabel('time');
 ylabel('amplitude');
 saveas(gcf,'figures\Exp1\DSB-SC Demodulated Signal 0 SNR.png')
-msgTime=resample(msgTime, fc,5*fc) ;
+msgTime=resample(msgTime, fc, 5*fc) ;
 fprintf("DSBSC Recieved using CD [SNR = 0] sound is playing\n");
 sound(msgTime, fc);
 pause(8);
@@ -190,6 +190,7 @@ title('DSB-SC DEMODULATION IN Time DOMAIN', 'SNR = 10');
 xlabel('time');
 ylabel('amplitude');
 saveas(gcf,'figures\Exp1\DSB-SC Demodulated Signal 10 SNR.png')
+msgTime=resample(msgTime, fc, 5*fc) ;
 fprintf("DSBSC Recieved using CD [SNR = 10] sound is playing\n");
 sound(msgTime, fc);
 pause(8);
@@ -208,6 +209,7 @@ title('DSB-SC DEMODULATION IN Time DOMAIN', 'SNR = 30');
 xlabel('time');
 ylabel('amplitude');
 saveas(gcf,'figures\Exp1\DSB-SC Demodulated Signal 30 SNR.png')
+msgTime=resample(msgTime, fc, 5*fc) ;
 fprintf("DSBSC Recieved using CD [SNR = 30] sound is playing\n");
 sound(msgTime, fc);
 pause(8);
@@ -226,6 +228,7 @@ title('DSB-SC DEMODULATION IN Time DOMAIN', 'frequency error = 100 Hz');
 xlabel('time');
 ylabel('amplitude');
 saveas(gcf,'figures\Exp1\DSB-SC Demodulated Signal frequency error 100 Hz.png')
+msgTime=resample(msgTime, fc, 5*fc) ;
 fprintf("DSBSC Recieved using CD [fe = 100 Hz] sound is playing\n");
 sound(msgTime, fc);
 pause(8);
@@ -244,6 +247,7 @@ title('DSB-SC DEMODULATION IN Time DOMAIN', 'phase error = 20 degree');
 xlabel('time');
 ylabel('amplitude');
 saveas(gcf,'figures\Exp1\DSB-SC Demodulated Signal phase error 20 degree.png')
+msgTime=resample(msgTime, fc, 5*fc) ;
 fprintf("DSBSC Recieved using CD [phase error = 20] sound is playing\n");
 sound(msgTime, fc);
 pause(8);
@@ -262,6 +266,7 @@ title('DSB-TC DEMODULATION IN Time DOMAIN', '[No noise]');
 xlabel('time');
 ylabel('amplitude');
 saveas(gcf,'figures\Exp1\DSB-TC Demodulated Signal 0 SNR.png')
+msgTime=resample(msgTime, fc, 5*fc) ;
 fprintf("DSBTC Recieved using CD [No noise] sound is playing\n");
 sound(msgTime, fc);
 pause(8);
@@ -279,6 +284,7 @@ title('DSB-TC DEMODULATION IN Time DOMAIN', 'SNR = 0');
 xlabel('time');
 ylabel('amplitude');
 saveas(gcf,'figures\Exp1\DSB-TC Demodulated Signal 0 SNR.png')
+msgTime=resample(msgTime, fc, 5*fc) ;
 fprintf("DSBTC Recieved using CD [SNR = 0] sound is playing\n");
 sound(msgTime, fc);
 pause(8);
@@ -297,6 +303,7 @@ title('DSB-TC DEMODULATION IN Time DOMAIN', 'SNR = 10');
 xlabel('time');
 ylabel('amplitude');
 saveas(gcf,'figures\Exp1\DSB-TC Demodulated Signal 10 SNR.png')
+msgTime=resample(msgTime, fc, 5*fc) ;
 fprintf("DSBTC Recieved using CD [SNR = 10] sound is playing\n");
 sound(msgTime, fc);
 pause(8);
@@ -315,6 +322,7 @@ title('DSB-TC DEMODULATION IN Time DOMAIN', 'SNR = 30');
 xlabel('time');
 ylabel('amplitude');
 saveas(gcf,'figures\Exp1\DSB-TC Demodulated Signal 30 SNR.png')
+msgTime=resample(msgTime, fc, 5*fc) ;
 fprintf("DSBTC Recieved using CD [SNR = 30] sound is playing\n");
 sound(msgTime, fc);
 pause(8);
@@ -333,6 +341,7 @@ title('DSB-TC DEMODULATION IN Time DOMAIN', 'frequency error = 100 Hz');
 xlabel('time');
 ylabel('amplitude');
 saveas(gcf,'figures\Exp1\DSB-TC Demodulated Signal frequency error 100 Hz.png')
+msgTime=resample(msgTime, fc, 5*fc) ;
 fprintf("DSBTC Recieved using CD [fe = 100 Hz] sound is playing\n");
 sound(msgTime, fc);
 pause(8);
@@ -351,6 +360,7 @@ title('DSB-TC DEMODULATION IN Time DOMAIN', 'phase error = 20 degree');
 xlabel('time');
 ylabel('amplitude');
 saveas(gcf,'figures\Exp1\DSB-TC Demodulated Signal phase error 20 degree.png')
+msgTime=resample(msgTime, fc, 5*fc) ;
 fprintf("DSBTC Recieved using CD [phase error = 20] sound is playing\n");
 sound(msgTime, fc);
 pause(8);
