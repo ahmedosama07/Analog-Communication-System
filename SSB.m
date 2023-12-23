@@ -88,7 +88,7 @@ xlabel('frequency(hz)');
 ylabel('amplitude');
 subplot(2, 1, 2);
 plot(tBP, msgTime);
-title('SSB-SC DEMODULATION IN Time DOMAIN', '[Ideal BPF]');
+title('SSB-SC DEMODULATION IN Time DOMAIN', '[Ideal LPF]');
 xlabel('time');
 ylabel('amplitude');
 saveas(gcf,'figures\Exp2\SSB-SC Demodulated Signal [No nise] [Ideal LPF].png')
@@ -188,9 +188,16 @@ saveas(gcf,'figures\Exp2\SSB-TC Modulated Signal - Frequency [Ideal BPF].png')
 
 %% Reciever using ED
 [envelopeTC] = envelopeDetector(modulatedSignalBPTime);
+fenv = linspace(-(5*fc)/2,(5*fc)/2,length(envelopeTC));
 figure()
+subplot(2,1,1);
 plot(tBP,envelopeTC);
 title('SSB-TC DEMODULATION IN THE TIME DOMAIN USING ENVELOPE');
+xlabel('time');
+ylabel('amplitude');
+subplot(2,1,2);
+plot(fenv,abs(fftshift(fft(envelopeTC))));
+title('SSB-TC DEMODULATION IN THE FREQUENCY DOMAIN USING ENVELOPE');
 xlabel('time');
 ylabel('amplitude');
 saveas(gcf,'figures\Exp2\SSB-TC Demodulated Signal - Frequency [Ideal LPF].png')
