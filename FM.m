@@ -67,7 +67,7 @@ recievedNBFM = zeros(length(modulatedSignalTime), 1);
 recievedNBFM(2:end) = diff(envelopeNBFM);
 
 xm = resample(recievedNBFM, fc, 5*fc);
-t = linspace(0,length(xm)/(5*fc),length(xm));
+t = linspace(0,length(xm)/fc,length(xm));
 xm = xm / scale;
 
 Xm = fftshift(fft(xm));
