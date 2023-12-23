@@ -8,14 +8,14 @@ phase = angle(signalF);
 f = linspace( -fs/2 , fs/2 , length(signalF) );
 
 figure();
-subplot(1,2,1);
+subplot(2,1,1);
 title('signal in the frequency domain');
 plot(f,magnitude);
 xlabel('Frequency');
 ylabel('Amplitude'); 
 title('Magnitude spectrum');
 
-subplot(1,2,2);
+subplot(2,1,2);
 plot(f,phase);
 xlabel('Frequency');
 ylabel('Phase'); 
