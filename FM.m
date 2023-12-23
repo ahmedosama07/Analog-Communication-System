@@ -19,14 +19,14 @@ f_received = linspace(-fs/2,fs/2,length(signalFilteredTime)) ;
 magnitudeFiltered = abs(signalFilteredFreq) ;
 phaseFiltered = angle(signalFilteredFreq) ;
 figure(4);
-subplot(1,2,1);
+subplot(2,1,1);
 plot(f_received,magnitudeFiltered);
 xlabel('Frequency');
 ylabel('Magnitude'); 
 title('magnitude of filtered signal');
 saveas(gcf,'figures\Exp3\Filtered Signal Magnitude - Frequency Domain.png');
 
-subplot(1,2,2);
+subplot(2,1,2);
 plot(f_received,phaseFiltered);
 xlabel('Frequency');
 ylabel('Phase'); 
@@ -51,11 +51,11 @@ title("Modulated Signal in Time Domain");
 saveas(gcf,'figures\Exp3\Modulated Signal - Time Domain.png');
 
 figure()
+subplot(2,1,1);
 plot(f, abs(modulatedSignal));
 title("Modulated Signal Magnitude in Frequency Domain");
 saveas(gcf,'figures\Exp3\Modulated Signal Magnitude - Frequency Domain.png');
-
-figure()
+subplot(2,1,2);
 plot(f, angle(modulatedSignal));
 title("Modulated Signal Phase in Frequency Domain");
 saveas(gcf,'figures\Exp3\Modulated Signal Phrequency - Frequency Domain.png');
