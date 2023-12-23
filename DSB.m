@@ -19,13 +19,13 @@ f_received = linspace(-fs/2,fs/2,length(signalFilteredTime)) ;
 magnitudeFiltered = abs(signalFilteredFreq) ;
 phaseFiltered = angle(signalFilteredFreq) ;
 figure();
-subplot(1,2,1);
+subplot(2,1,1);
 plot(f_received,magnitudeFiltered);
 xlabel('Frequency');
 ylabel('Magnitude'); 
 title('magnitude of filtered signal');
 
-subplot(1,2,2);
+subplot(2,1,2);
 plot(f_received,phaseFiltered);
 xlabel('Frequency');
 ylabel('Phase'); 
@@ -140,7 +140,7 @@ pause(8);
 
 %% Reciever using Coherent Detection
 %DSB-SC
-[msgFreq, msgTime, f] = coherentDetection(modulatedSignalSCTime, "No noise", 5, fc, tSC, 0);
+[msgFreq, msgTime, f] = coherentDetection(modulatedSignalSCTime, "No noise", 5, fc, tSC, 0, "ideal");
 figure();
 subplot(2, 1, 1);
 plot(f, abs(msgFreq));
@@ -158,7 +158,7 @@ fprintf("DSBSC Recieved using CD [No noise] sound is playing\n");
 sound(msgTime, fc);
 pause(8);
 
-[msgFreq, msgTime, f] = coherentDetection(modulatedSignalSCTime, 0, 5, fc, tSC, 0);
+[msgFreq, msgTime, f] = coherentDetection(modulatedSignalSCTime, 0, 5, fc, tSC, 0, "ideal");
 figure();
 subplot(2, 1, 1);
 plot(f, abs(msgFreq));
@@ -177,7 +177,7 @@ sound(msgTime, fc);
 pause(8);
 
 
-[msgFreq, msgTime, f] = coherentDetection(modulatedSignalSCTime, 10, 5, fc, tSC, 0);
+[msgFreq, msgTime, f] = coherentDetection(modulatedSignalSCTime, 10, 5, fc, tSC, 0, "ideal");
 figure();
 subplot(2, 1, 1);
 plot(f, abs(msgFreq));
@@ -196,7 +196,7 @@ sound(msgTime, fc);
 pause(8);
 
 
-[msgFreq, msgTime, f] = coherentDetection(modulatedSignalSCTime, 30, 5, fc, tSC, 0);
+[msgFreq, msgTime, f] = coherentDetection(modulatedSignalSCTime, 30, 5, fc, tSC, 0, "ideal");
 figure();
 subplot(2, 1, 1);
 plot(f, abs(msgFreq));
@@ -215,7 +215,7 @@ sound(msgTime, fc);
 pause(8);
 
 fe = 100;
-[msgFreq, msgTime, f] = coherentDetection(modulatedSignalSCTime, 30, 5, fc + fe, tSC, 0);
+[msgFreq, msgTime, f] = coherentDetection(modulatedSignalSCTime, 30, 5, fc + fe, tSC, 0, "ideal");
 figure();
 subplot(2, 1, 1);
 plot(f, abs(msgFreq));
@@ -234,7 +234,7 @@ sound(msgTime, fc);
 pause(8);
 
 phase = 20;
-[msgFreq, msgTime, f] = coherentDetection(modulatedSignalSCTime, 30, 5, fc, tSC, phase);
+[msgFreq, msgTime, f] = coherentDetection(modulatedSignalSCTime, 30, 5, fc, tSC, phase, "ideal");
 figure();
 subplot(2, 1, 1);
 plot(f, abs(msgFreq));
@@ -253,7 +253,7 @@ sound(msgTime, fc);
 pause(8);
 
 % DSB-TC
-[msgFreq, msgTime, f] = coherentDetection(modulatedSignalTCTime, "No noise", 5, fc, tTC, 0);
+[msgFreq, msgTime, f] = coherentDetection(modulatedSignalTCTime, "No noise", 5, fc, tTC, 0, "ideal");
 figure();
 subplot(2, 1, 1);
 plot(f, abs(msgFreq));
@@ -271,7 +271,7 @@ fprintf("DSBTC Recieved using CD [No noise] sound is playing\n");
 sound(msgTime, fc);
 pause(8);
 
-[msgFreq, msgTime, f] = coherentDetection(modulatedSignalTCTime, 0, 5, fc, tTC, 0);
+[msgFreq, msgTime, f] = coherentDetection(modulatedSignalTCTime, 0, 5, fc, tTC, 0, "ideal");
 figure();
 subplot(2, 1, 1);
 plot(f, abs(msgFreq));
@@ -290,7 +290,7 @@ sound(msgTime, fc);
 pause(8);
 
 
-[msgFreq, msgTime, f] = coherentDetection(modulatedSignalTCTime, 10, 5, fc, tTC, 0);
+[msgFreq, msgTime, f] = coherentDetection(modulatedSignalTCTime, 10, 5, fc, tTC, 0, "ideal");
 figure();
 subplot(2, 1, 1);
 plot(f, abs(msgFreq));
@@ -309,7 +309,7 @@ sound(msgTime, fc);
 pause(8);
 
 
-[msgFreq, msgTime, f] = coherentDetection(modulatedSignalTCTime, 30, 5, fc, tTC, 0);
+[msgFreq, msgTime, f] = coherentDetection(modulatedSignalTCTime, 30, 5, fc, tTC, 0, "ideal");
 figure();
 subplot(2, 1, 1);
 plot(f, abs(msgFreq));
@@ -328,7 +328,7 @@ sound(msgTime, fc);
 pause(8);
 
 fe = 100;
-[msgFreq, msgTime, f] = coherentDetection(modulatedSignalTCTime, 30, 5, fc + fe, tTC, 0);
+[msgFreq, msgTime, f] = coherentDetection(modulatedSignalTCTime, 30, 5, fc + fe, tTC, 0, "ideal");
 figure();
 subplot(2, 1, 1);
 plot(f, abs(msgFreq));
@@ -347,7 +347,7 @@ sound(msgTime, fc);
 pause(8);
 
 phase = 20;
-[msgFreq, msgTime, f] = coherentDetection(modulatedSignalTCTime, 30, 5, fc, tTC, phase);
+[msgFreq, msgTime, f] = coherentDetection(modulatedSignalTCTime, 30, 5, fc, tTC, phase, "ideal");
 figure();
 subplot(2, 1, 1);
 plot(f, abs(msgFreq));
