@@ -95,6 +95,6 @@ xlabel('frequency ');
 ylabel('phase');
 saveas(gcf,'figures\Exp3\Demodulated Signal - Frequency Domain.png');
 
-sound(signalFilteredTime(1:end-600), fc);
+sound(signalFilteredTime(1:end), fc);
 pause(8);
 
