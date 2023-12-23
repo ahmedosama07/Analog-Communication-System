@@ -8,7 +8,5 @@ figure()
 l = length(S_DSB_TC);
 f = linspace(-Fs/2, Fs/2, l);
 modulatedSignalFreq = fftshift(fft(S_DSB_TC,l));
-
-plot(f,abs(modulatedSignalFreq));
 end
 
