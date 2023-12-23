@@ -60,7 +60,7 @@ elseif modulationType == "TC"
 end
 
 if filterType == "bandpass"
-    [modulatedSignalFreq, modulatedSignalTime] = bandPassFilter(DSBFreq, f, fc);
+    [modulatedSignalFreq, modulatedSignalTime] = bandPassFilter(DSBFreq, fc, Fs);
 elseif filterType == "butterworth"
     [modulatedSignalFreq, modulatedSignalTime] = butterworthFilter(DSBTime, fc, Fs);
 end
