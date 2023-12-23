@@ -67,7 +67,7 @@ recievedNBFM = zeros(length(modulatedSignalTime), 1);
 recievedNBFM(2:end) = diff(envelopeNBFM);
 
 xm = resample(recievedNBFM, fc, 5*fc);
-xm = xm(6767:end-6767);
+%xm = xm(6767:end-6767);
 t = linspace(0,length(xm)/fc,length(xm));
 xm = xm / scale;
 
@@ -95,6 +95,6 @@ xlabel('frequency ');
 ylabel('phase');
 saveas(gcf,'figures\Exp3\Demodulated Signal - Frequency Domain.png');
 
-sound(signalFilteredTime(1:end), fc);
+sound(signalFilteredTime, fc);
 pause(8);
 
