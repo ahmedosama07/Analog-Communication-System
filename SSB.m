@@ -18,13 +18,13 @@ f_received = linspace(-fs/2,fs/2,length(signalFilteredTime)) ;
 magnitudeFiltered = abs(signalFilteredFreq) ;
 phaseFiltered = angle(signalFilteredFreq) ;
 figure();
-subplot(1,2,1);
+subplot(2,1,1);
 plot(f_received,magnitudeFiltered);
 xlabel('Frequency');
 ylabel('Magnitude'); 
-title('magnitude of filtered signal');
+title('Magnitude of filtered signal');
 
-subplot(1,2,2);
+subplot(2,1,2);
 plot(f_received,phaseFiltered);
 xlabel('Frequency');
 ylabel('Phase'); 
@@ -173,7 +173,7 @@ ylabel('amplitude');
 title('Modulated SSB-TC signal in time domain', '[Ideal BPF]');
 saveas(gcf,'figures\Exp2\SSB-TC Modulated Signal - Time [Ideal BPF].png')
 
-figure();
+figure(50);
 subplot(2, 1, 1);
 plot(fBP,abs(modulatedSignalBP));
 title('SSB-TC MODULATION MAGNITUDE IN FREQUENCY DOMAIN', '[Ideal BPF]');
