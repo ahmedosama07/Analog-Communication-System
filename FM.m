@@ -63,16 +63,16 @@ saveas(gcf,'figures\Exp3\Modulated Signal Phrequency - Frequency Domain.png');
 %% Reciever 
 [envelopeNBFM] = envelopeDetector(modulatedSignalTime);
 
-recievedNBFM = zeros(length(modulatedSignalTime), 1);
-recievedNBFM(2:end) = diff(envelopeNBFM);
-
+recievedNBFM = [0; diff(envelopeNBFM)];
 xm = resample(recievedNBFM, fc, 5*fc);
-%xm = xm(6767:end-6767);
+
 t = linspace(0,length(xm)/fc,length(xm));
 xm = xm / scale;
-
 Xm = fftshift(fft(xm));
+%[b, a] = butter(6, 4000/(fs/2), 'low');
+%signalFilteredTime = filter(b, a, xm);
 [signalFilteredFreq, signalFilteredTime] = lowPassFilter(Xm,fs);
+%signalFilteredFreq = fftshift(fft(signalFilteredTime));
 f = linspace(-(5*fc)/2, (5*fc)/2, length(signalFilteredFreq));
 
 figure()
